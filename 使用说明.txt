@@ -1,0 +1,25 @@
+1.修改esp8266.c下的wifi账号及密码
+
+2.修改onenet.c下的proid、auth_info和devid
+
+3.指令说明：
+	1.命令直接下发：
+		redled:1	打开红灯
+		greenled:1	打开绿灯
+		yellowled:1	打开黄灯
+		blueled:1	打开蓝灯
+		同理，1替换为0则是关闭
+
+	2.应用命令填写方式：
+		redled:{V}，		打开红灯；开关开值-1，开关关值-0
+		greenled:{V}，		打开绿灯；开关开值-1，开关关值-0
+		yellowled:{V}，		打开黄灯；开关开值-1，开关关值-0
+		blueled:{V}，		打开蓝灯；开关开值-1，开关关值-0
+
+2018-11-15        esp8266.c       	ESP8266_Init()  复位引脚  开的时钟，和实际的不一样
+
+2018-11-18        mqttkit.c        288行   flags |= MQTT_CONNECT_USER_NAME | MQTT_CONNECT_PASSORD 改为  flags &=63;  取消账号密码验证
+
+2018-11-22        mqttkit.c         463行    
+if(MQTT_PacketPublish(MQTT_PUBLISH_ID, "$dp", NULL, send_len + 3, MQTT_QOS_LEVEL1, 0, 1, mqttPacket) == 0)
+改为   if(MQTT_PacketPublish(MQTT_PUBLISH_ID, "test", NULL, send_len + 3, MQTT_QOS_LEVEL1, 0, 1, mqttPacket) == 0)
